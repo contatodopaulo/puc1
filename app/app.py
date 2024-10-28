@@ -9,7 +9,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins=['https://puc1.paulogontijo.com', 'http://puc1.paulogontijo.com'])
+
+# Configure CORS to allow requests from your domain
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["https://puc1.paulogontijo.com"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
+    }
+})
+
+# Add CORS headers to all responses
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'https://puc1.paulogontijo.com')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 # Database configuration
 db_config = {
@@ -46,8 +64,13 @@ def init_db():
 # Initialize the database when the app starts
 init_db()
 
-@app.route('/api/signup', methods=['POST'])
+@app.route('/api/signup', methods=['POST', 'OPTIONS'])
 def signup():
+    # Handle OPTIONS request (preflight)
+    if request.method == 'OPTIONS':
+        return '', 200
+        
+    # Your existing signup code for POST requests
     try:
         data = request.get_json()
         

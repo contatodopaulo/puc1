@@ -12,6 +12,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify({
                 name,
                 email,
@@ -24,7 +25,6 @@ document.getElementById('signupForm').addEventListener('submit', async function(
         
         if (response.ok) {
             alert('Signup successful!');
-            // Redirect or do something else after successful signup
         } else {
             alert(data.error || 'Signup failed');
         }
