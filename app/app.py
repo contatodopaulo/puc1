@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # This allows your frontend to make requests to this backend
+CORS(app, origins=['https://puc1.paulogontijo.com', 'http://puc1.paulogontijo.com'])
 
 # Database configuration
 db_config = {
