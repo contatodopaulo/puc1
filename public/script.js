@@ -7,7 +7,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     const remember = document.getElementById('remember').checked;
     
     try {
-        const response = await fetch('https://puc1.paulogontijo.com:2053/api/signup', {
+        const response = await fetch('http://puc1.paulogontijo.com:5000/api/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

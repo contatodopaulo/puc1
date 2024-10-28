@@ -13,7 +13,7 @@ app = Flask(__name__)
 # Configure CORS to allow requests from your domain
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["https://puc1.paulogontijo.com"],
+        "origins": ["http://puc1.paulogontijo.com"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "supports_credentials": True
@@ -23,7 +23,7 @@ CORS(app, resources={
 # Add CORS headers to all responses
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'https://puc1.paulogontijo.com')
+    response.headers.add('Access-Control-Allow-Origin', 'http://puc1.paulogontijo.com')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
